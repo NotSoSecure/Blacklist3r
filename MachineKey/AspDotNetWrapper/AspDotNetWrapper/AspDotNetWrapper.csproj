@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DE95E30C-9F49-4331-AA36-B4F7C3CD0858}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AspDotNetWrapper</RootNamespace>
+    <AssemblyName>AspDotNetWrapper</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommandLine, Version=2.3.0.0, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineParser.2.3.0\lib\net45\CommandLine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Console, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.0.0\lib\net46\System.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.TypeExtensions.4.1.0\lib\net46\System.Reflection.TypeExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Customization\DataWriter.cs" />
+    <Compile Include="Customization\EncryptDecrypt.cs" />
+    <Compile Include="Customization\DefinePurpose.cs" />
+    <Compile Include="Customization\FormAuthenticationHelper.cs" />
+    <Compile Include="Customization\HelperClasses.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="AspDotNetWrapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System.Web.Configuration\ConfigUtil.cs" />
+    <Compile Include="System.Web.Security.Cryptography\AspNetCryptoServiceProvider.cs" />
+    <Compile Include="System.Web.Security.Cryptography\CryptoAlgorithms.cs" />
+    <Compile Include="System.Web.Security.Cryptography\CryptographicKey.cs" />
+    <Compile Include="System.Web.Security.Cryptography\CryptoServiceOptions.cs" />
+    <Compile Include="System.Web.Security.Cryptography\CryptoUtil.cs" />
+    <Compile Include="System.Web.Security.Cryptography\DataProtectorCryptoService.cs" />
+    <Compile Include="System.Web.Security.Cryptography\HomogenizingCryptoServiceWrapper.cs" />
+    <Compile Include="System.Web.Security.Cryptography\ICryptoAlgorithmFactory.cs" />
+    <Compile Include="System.Web.Security.Cryptography\ICryptoService.cs" />
+    <Compile Include="System.Web.Security.Cryptography\ICryptoServiceProvider.cs" />
+    <Compile Include="System.Web.Security.Cryptography\IDataProtectorFactory.cs" />
+    <Compile Include="System.Web.Security.Cryptography\IMasterKeyProvider.cs" />
+    <Compile Include="System.Web.Security.Cryptography\KeyDerivationFunction.cs" />
+    <Compile Include="System.Web.Security.Cryptography\MachineKeyCryptoAlgorithmFactory.cs" />
+    <Compile Include="System.Web.Security.Cryptography\MachineKeyDataProtectorFactory.cs" />
+    <Compile Include="System.Web.Security.Cryptography\MachineKeyMasterKeyProvider.cs" />
+    <Compile Include="System.Web.Security.Cryptography\NetFXCryptoService.cs" />
+    <Compile Include="System.Web.Security.Cryptography\Purpose.cs" />
+    <Compile Include="System.Web.Security.Cryptography\SerializingBinaryReader.cs" />
+    <Compile Include="System.Web.Security.Cryptography\SerializingBinaryWriter.cs" />
+    <Compile Include="System.Web.Security.Cryptography\SP800_108.cs" />
+    <Compile Include="System.Web.Util\BinaryCompatibility.cs" />
+    <Compile Include="System.Web.Util\Debug.cs" />
+    <Compile Include="System.Web.Util\HttpEncoderUtility.cs" />
+    <Compile Include="System.Web.Util\VersionUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
+    <Content Include="LICENSE\FormAuthentication_LICENSE.txt" />
+    <Content Include="LICENSE\Microsoft_LICENSE.txt" />
+    <Content Include="Resource\DecryptedText.txt" />
+    <Content Include="Resource\MachineKeys.txt" />
+    <Content Include="Resource\SampleCommand.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
