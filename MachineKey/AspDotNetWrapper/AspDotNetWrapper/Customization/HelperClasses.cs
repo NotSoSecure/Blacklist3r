@@ -69,10 +69,10 @@ namespace NotSoSecure.AspDotNetWrapper
         public bool IsError { get; set; }
         public FormsAuthenticationCookie objFormAuthCookie = new FormsAuthenticationCookie();
 
-        public ReadObject()
+        public ReadObject(string strDecryptDataFilePath)
         {
             IsError = false;
-            StreamReader streamReader = new System.IO.StreamReader(DataWriter.strDecryptedTxtFilePath);
+            StreamReader streamReader = new System.IO.StreamReader(strDecryptDataFilePath);
             string line = string.Empty;
             while ((line = streamReader.ReadLine()) != null)
             {

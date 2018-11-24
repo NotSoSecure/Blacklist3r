@@ -1,7 +1,0 @@
-AspDotNetWrapper.exe --keypath C:\Users\Root\Downloads\AspDotNetWrapper\AspDotNetWrapper\bin\Debug\MachineKeys.txt --cookie 195A989biBjM_NAqqiie5DnHKfcwrNGDuT-Suumqmw4POC3dpxOzGT3_KlPsbITU1mhJKV1WC4JUSkevv7IpKQY2HVRhEP48bIXCuXU0PPfoyivNCiSY2tR4-Hp0LlZWT0568HrvjouLqpavsfiy6AHHoVdDxUlZ7QU3pYlf9ZbYkJQR8LayKuMHSo23GgpUPyBAvgzo0tI2H3ae6e0nwmhK7n5CqUrSpj07EhURCbpWg_Sq4gEbKUqkG5VDslF4Qi3ONqr0K0O_33VgKzftFcl6srN5_iD-usTJVO5NCXlB1dfA81o34SMX038S2X4xuqJPzlptWyXtsMO8ex3vgecr4zn0SHqHMCU0TxAwlHfADcjviNx9rHG1aCc90Np7D7H6d-3aN9HTECwMDwZ6NdUfmspocoLun0-R6nAFp6c --decrypt --purpose=owin.cookie  --valalgo=hmacsha512 --decalgo=aes
-
-AspDotNetWrapper.exe --decryptDataFilePath C:\Users\Root\Downloads\AspDotNetWrapper\AspDotNetWrapper\bin\Debug\DecryptedText.txt
-
-AspDotNetWrapper.exe --keypath C:\Users\Root\Downloads\AspDotNetWrapper\AspDotNetWrapper\bin\Debug\MachineKeys.txt --cookie CA387A93AD4214F356ED05C26C1E4D80F0804CD526766778B62D4F9213B87B5369755F95008A34644B9CA6B7646E191958A1AE14DB398AB943D3DB042EDA06EC4B5BEA9E3EB60E9877646AD4A50BE9435A2D3B4B3005836CBBBDA64A5E8738511211AA1F --decrypt --purpose=aspxauth --valalgo=sha1 --decalgo=aes
-
-AspDotNetWrapper.exe --decryptDataFilePath C:\Users\Root\Downloads\AspDotNetWrapper\AspDotNetWrapper\bin\Debug\DecryptedText.txt

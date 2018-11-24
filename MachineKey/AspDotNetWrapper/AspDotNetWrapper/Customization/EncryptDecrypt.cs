@@ -66,9 +66,9 @@ namespace NotSoSecure.AspDotNetWrapper
             return clearData;
         }
 
-        public static string EncryptData()
+        public static string EncryptData(string strDecryptDataFilePath)
         {
-            ReadObject objData = new ReadObject();
+            ReadObject objData = new ReadObject(strDecryptDataFilePath);
             AspNetCryptoServiceProvider obj = new AspNetCryptoServiceProvider(
                 objData.ValidationKey, 
                 objData.ValidationAlgo, objData.DecryptionKey, objData.DecryptionAlgo);

@@ -10,14 +10,12 @@ namespace NotSoSecure.AspDotNetWrapper
 {
     class DataWriter
     {
-        public static string strDecryptedTxtFilePath = AppDomain.CurrentDomain.BaseDirectory + "DecryptedText.txt";
-
         public static void WriteKeysToFile(string strValidationKey, string strDecryptionKey, string strValidationAlgorithm, string strDecryptionAlgorithm, byte [] byteEncryptionIV)
         {
-            if (File.Exists(strDecryptedTxtFilePath))
-                File.Delete(strDecryptedTxtFilePath);
+            if (File.Exists(AspDotNetWrapper.strDecryptedTxtFilePath))
+                File.Delete(AspDotNetWrapper.strDecryptedTxtFilePath);
 
-            using (FileStream streamWriter = new FileStream(strDecryptedTxtFilePath, FileMode.OpenOrCreate, FileAccess.Write))
+            using (FileStream streamWriter = new FileStream(AspDotNetWrapper.strDecryptedTxtFilePath, FileMode.OpenOrCreate, FileAccess.Write))
             {
                 byte[] byteData = Encoding.ASCII.GetBytes(ContantValue.strDecryptionKey + strDecryptionKey);
                 streamWriter.Write(byteData, 0, byteData.Length);
@@ -45,7 +43,7 @@ namespace NotSoSecure.AspDotNetWrapper
 
         public static void WritePurposeToFile(string strPurpose)
         {
-            using (FileStream streamWriter = new FileStream(strDecryptedTxtFilePath, FileMode.Append, FileAccess.Write))
+            using (FileStream streamWriter = new FileStream(AspDotNetWrapper.strDecryptedTxtFilePath, FileMode.Append, FileAccess.Write))
             {
                 byte[] byteData = Encoding.ASCII.GetBytes(ContantValue.strPurpose+strPurpose);
                 streamWriter.Write(byteData, 0, byteData.Length);
@@ -57,7 +55,7 @@ namespace NotSoSecure.AspDotNetWrapper
         public static void WriteOtherDataToFile(EnumPurpose enumPurpose, byte[] byteClearData)
         {
             byte[] byteData = null;
-            using (FileStream streamWriter = new FileStream(strDecryptedTxtFilePath, FileMode.Append, FileAccess.Write))
+            using (FileStream streamWriter = new FileStream(AspDotNetWrapper.strDecryptedTxtFilePath, FileMode.Append, FileAccess.Write))
             {
                 switch (enumPurpose)
                 {
@@ -116,7 +114,7 @@ namespace NotSoSecure.AspDotNetWrapper
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(Encoding.ASCII.GetString(byteClearData));
             Console.ResetColor();
-            Console.WriteLine("\n\nData stored at DecryptedText.txt file!!");
+            Console.WriteLine("\n\nData stored at {0} file!!", AspDotNetWrapper.strDecryptedTxtFilePath);
         }
 
         public static byte[] Compress(byte[] byteDataToCompress)

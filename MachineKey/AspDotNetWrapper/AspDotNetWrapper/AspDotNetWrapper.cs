@@ -50,36 +50,54 @@ namespace NotSoSecure.AspDotNetWrapper
                 }
                 else
                 {
-                    byte[] protectedData = DefinePurpose.GetProtectedData(strCookieValue);
-                    if (protectedData != null)
+                    if (File.Exists(strKeysFilePath))
                     {
-                        byte[] clearData = EncryptDecrypt.DecryptData(protectedData, strKeysFilePath, strValidationAlgorithm, strDecryptionAlgorithm);
-                        if (clearData != null)
+                        byte[] protectedData = DefinePurpose.GetProtectedData(strCookieValue);
+                        if (protectedData != null)
                         {
-                            DataWriter.WritePurposeToFile(strPurpose);
-                            DataWriter.WriteOtherDataToFile(DefinePurpose.enumPurpose, clearData);
+                            byte[] clearData = EncryptDecrypt.DecryptData(protectedData, strKeysFilePath, strValidationAlgorithm, strDecryptionAlgorithm);
+                            if (clearData != null)
+                            {
+                                DataWriter.WritePurposeToFile(strPurpose);
+                                DataWriter.WriteOtherDataToFile(DefinePurpose.enumPurpose, clearData);
+                            }
+                        }
+                        else
+                        {
+                            Console.Write("Failed to get protected data!!");
                         }
                     }
                     else
                     {
-                        Console.Write("Failed to get protected data!!");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("\n\nKey path file {0} not found!!\n", strKeysFilePath);
+                        Console.ResetColor();
                     }
                 }
             }
             else
             {
-                if (strDecryptedTxtFilePath == null)
+                if (strDecryptDataFilePath == null)
                 {
                     Options.GetUsage(false);
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\nEncryptedData");
-                    Console.WriteLine("-------------");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(EncryptDecrypt.EncryptData());
-                    Console.ResetColor();
+                    if (File.Exists(strDecryptDataFilePath))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\nEncryptedData");
+                        Console.WriteLine("-------------");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(EncryptDecrypt.EncryptData(strDecryptDataFilePath));
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("\n\nDecryptedText.txt File not found!!\n");
+                        Console.ResetColor();
+                    }
                 }
             }
         }
