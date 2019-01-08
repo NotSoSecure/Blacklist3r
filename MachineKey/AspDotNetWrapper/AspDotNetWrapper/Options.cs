@@ -26,6 +26,9 @@ namespace NotSoSecure.AspDotNetWrapper
         [Option('b', "decalgo", Required = false, HelpText = "Decryption algorithm")]
         public string strDecryptionAlgorithm { get; set; }
 
+        [Option('o', "outputFile", Required = false, HelpText = "Output file path")]
+        public string strOutputFilePath { get; set; }
+
         public static void GetUsage(bool bDecrypt)
         {
             if (bDecrypt)

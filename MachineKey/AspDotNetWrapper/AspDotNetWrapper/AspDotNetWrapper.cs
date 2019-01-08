@@ -20,7 +20,12 @@ namespace NotSoSecure.AspDotNetWrapper
 
         static void Main(string[] args)
         {
-            string strKeysFilePath = null, strCookieValue = null, strDecryptDataFilePath = null, strPurpose = null, strValidationAlgorithm = null, strDecryptionAlgorithm = null;
+            string strKeysFilePath = null,
+                strCookieValue = null,
+                strDecryptDataFilePath = null,
+                strPurpose = null,
+                strValidationAlgorithm = null,
+                strDecryptionAlgorithm = null;
             bool bDecrypt = false;
             Parser.Default.ParseArguments<Options>(args)
                 .WithParsed<Options>(options =>
@@ -32,6 +37,8 @@ namespace NotSoSecure.AspDotNetWrapper
                     strPurpose = options.strPurpose;
                     strDecryptDataFilePath = options.strDecryptDataFilePath;
                     bDecrypt = options.bDecrypt;
+                    if(!String.IsNullOrEmpty(options.strOutputFilePath))
+                        strDecryptedTxtFilePath = options.strOutputFilePath;
                 });
 
             if (strValidationAlgorithm != null)
