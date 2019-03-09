@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Cipher import AES
 import base64
