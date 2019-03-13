@@ -1,5 +1,5 @@
 # AES256 Decrypter
-It will try to find the key from the pre-define cryptographic keys list based on iteration method and try to identify the cryptographic key using which the data is encrypted.
+A Python script to decrypt data that are encrypted using pre-shared cryptographic keys.
 
 # Usage
 
