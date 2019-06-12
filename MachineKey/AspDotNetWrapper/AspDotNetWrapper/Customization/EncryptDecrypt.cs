@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Security.Cryptography;
 
 namespace NotSoSecure.AspDotNetWrapper
@@ -70,7 +66,7 @@ namespace NotSoSecure.AspDotNetWrapper
             return clearData;
         }
 
-        public static void DecodeViewState(byte[] protectedData, string strMachineKeysFilePath, string strValidationAlgorithm, string strDecryptionAlgorithm, string modifier)
+        public static void DecodeViewState(byte[] protectedData, string strMachineKeysFilePath, string strValidationAlgorithm, string strDecryptionAlgorithm, string modifier, string strPurpose)
         {
             if (File.Exists(strMachineKeysFilePath))
             {
@@ -97,6 +93,7 @@ namespace NotSoSecure.AspDotNetWrapper
                         Console.WriteLine("DecryptionKey:" + strDecryptionKey);
                         Console.WriteLine("ValidationKey:" + strValidationKey);
                         DataWriter.WriteKeysToFile(strValidationKey, strDecryptionKey, strValidationAlgorithm, strDecryptionAlgorithm, null);
+                        DataWriter.WritePurposeToFile(strPurpose);
                         Console.WriteLine("\n\nEncodedDataWithoutHash:" + strDecodedData);
                         Console.ResetColor();
                         break;
@@ -108,18 +105,23 @@ namespace NotSoSecure.AspDotNetWrapper
         public static string EncryptData(string strDecryptDataFilePath)
         {
             ReadObject objData = new ReadObject(strDecryptDataFilePath);
-            AspNetCryptoServiceProvider obj = new AspNetCryptoServiceProvider(
-                objData.ValidationKey, 
-                objData.ValidationAlgo, objData.DecryptionKey, objData.DecryptionAlgo);
-            obj.SetEncryptionIV(objData.EncryptionIV);
             DefinePurpose.SetPurposeString(objData.Purpose);
+            if (DefinePurpose.enumPurpose != EnumPurpose.VIEWSTATE)
+            {
+                AspNetCryptoServiceProvider obj = new AspNetCryptoServiceProvider(
+                    objData.ValidationKey,
+                    objData.ValidationAlgo, objData.DecryptionKey, objData.DecryptionAlgo);
+                obj.SetEncryptionIV(objData.EncryptionIV);
 
-            Purpose objPurpose = null;
-            byte[] byteClearData = null;
-            DefinePurpose.GetPurposeAndClearData(objData, out objPurpose, out byteClearData);
-            ICryptoService cryptoService = obj.GetCryptoService(objPurpose);
-            
-            return PrintData(cryptoService.Protect(byteClearData));
+
+                Purpose objPurpose = null;
+                byte[] byteClearData = null;
+                DefinePurpose.GetPurposeAndClearData(objData, out objPurpose, out byteClearData);
+                ICryptoService cryptoService = obj.GetCryptoService(objPurpose);
+
+                return PrintData(cryptoService.Protect(byteClearData));
+            }
+            return "Encryption not supported for this module";
         }
 
         public static string PrintData(byte[] byteProtectedData)

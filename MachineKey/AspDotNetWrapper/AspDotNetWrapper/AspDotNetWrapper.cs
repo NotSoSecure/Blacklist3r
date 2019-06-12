@@ -1,15 +1,5 @@
 ﻿using CommandLine;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
-using System.Web;
-using System.Web.Security.Cryptography;
-using System.Web.Configuration;
-using System.Reflection;
-using System.Web.UI;
 using System.IO;
 
 namespace NotSoSecure.AspDotNetWrapper
@@ -20,6 +10,7 @@ namespace NotSoSecure.AspDotNetWrapper
 
         static void Main(string[] args)
         {
+            Console.Read();
             string strKeysFilePath = null,
                 strEncryptedData = null,
                 strDecryptDataFilePath = null,
@@ -58,8 +49,11 @@ namespace NotSoSecure.AspDotNetWrapper
                 DefinePurpose.SetPurposeString(strPurpose);
             else
             {
-                Options.GetUsage(true);
-                return;
+                if (bDecrypt)
+                {
+                    Options.GetUsage(true);
+                    return;
+                }
             }
             if (DefinePurpose.enumPurpose == EnumPurpose.VIEWSTATE && bLegacy && bDecode)
             {
@@ -75,7 +69,7 @@ namespace NotSoSecure.AspDotNetWrapper
                         byte[] protectedData = DefinePurpose.GetProtectedData(strEncryptedData);
                         if (protectedData != null)
                         {
-                            EncryptDecrypt.DecodeViewState(protectedData, strKeysFilePath, strValidationAlgorithm, strDecryptionAlgorithm, strModifier);
+                            EncryptDecrypt.DecodeViewState(protectedData, strKeysFilePath, strValidationAlgorithm, strDecryptionAlgorithm, strModifier, strPurpose);
                         }
                     }
                 }
