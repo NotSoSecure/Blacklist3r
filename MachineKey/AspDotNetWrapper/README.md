@@ -6,19 +6,28 @@ The tool used to encrypt/decrypt .aspnet.applicaitoncookie and .ASPXAUTH cookie 
 ```
 AspDotNetWrapper.exe --help
 
-AspDotNetWrapper 1.0.0.0
-Copyright ©  2018
+AspDotNetWrapper 2.0.0.0
+Copyright ©  2019
 
   -r, --keypath                Machine keys file path.
-  -c, --cookie                 Cookie value to decrypt.
-  -d, --decrypt                (Default: false) To decrypt the cookie.
+  -c, --encrypteddata          Encrypted data value to decrypt.
+  -d, --decrypt                (Default: false) To decrypt the encrypted data.
   -f, --decryptDataFilePath    file path where the decrypted information stored
   -p, --purpose                purpose
   -a, --valalgo                Validation algorithm
   -b, --decalgo                Decryption algorithm
+  -m, --modifier               Modifier used to encode the viewstate
+  -s, --macdecode              Used to decide whether viewstate is MAC enabled or not
+  -l, --legacy                 Used to decide whether viewstate legacy decrypt
+  -o, --outputFile             Output file path
+  -i, --IISDirPath             Application dir path in IIS tree
+  -t, --TargetPagePath         Target page path
+  -v, --antiCSRFToken          Anti CSRF token
   --help                       Display this help screen.
   --version                    Display version information.
 ```
+
+####The list of pre-shared MachineKey can be found in "./AspDotNetWrapper/Resource/MachineKey.txt" file
 
 #
 #
