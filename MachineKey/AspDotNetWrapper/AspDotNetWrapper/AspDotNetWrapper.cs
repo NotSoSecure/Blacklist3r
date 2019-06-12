@@ -10,7 +10,6 @@ namespace NotSoSecure.AspDotNetWrapper
 
         static void Main(string[] args)
         {
-            Console.Read();
             string strKeysFilePath = null,
                 strEncryptedData = null,
                 strDecryptDataFilePath = null,

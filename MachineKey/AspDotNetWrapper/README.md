@@ -78,6 +78,9 @@ AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata /wEPDwUKLTkyMTY0M
 
 --encrypteddata : __VIEWSTATE parameter value of the target application
 --modifier : __VIWESTATEGENERATOR parameter value
+--purpose : viewstate to decode ViewState value
+--legacy : Application built using ASP.Net < 4.5 framework 
+--macdecode : To decode the ViewState value
 ````
 
 #
@@ -90,4 +93,6 @@ AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata Ve3mZjZwbMRyGTts1
 --encrypteddata : __VIEWSTATE parameter value of the target application
 --IISDirPath : TemplateSourceDirectory
 --TargetPagePath : Aspx page path
+--purpose : viewstate to decrypt ViewState value
+--decrypt : To decrypt ViewState value
 ````
