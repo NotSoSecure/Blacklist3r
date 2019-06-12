@@ -27,7 +27,7 @@ Copyright ©  2019
   --version                    Display version information.
 ```
 
-####The list of pre-shared MachineKey can be found in "./AspDotNetWrapper/Resource/MachineKey.txt" file
+#### The list of pre-shared MachineKey can be found in "./AspDotNetWrapper/Resource/MachineKeys.txt" file
 
 #
 #
