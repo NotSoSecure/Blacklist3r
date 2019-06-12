@@ -33,9 +33,12 @@ namespace NotSoSecure.AspDotNetWrapper
                 streamWriter.Write(byteData, 0, byteData.Length);
                 streamWriter.WriteByte((byte)'\n');
 
-                byteData = Encoding.ASCII.GetBytes(ContantValue.strEncryptionIV + Convert.ToBase64String(byteEncryptionIV));
-                streamWriter.Write(byteData, 0, byteData.Length);
-                streamWriter.WriteByte((byte)'\n');
+                if (byteEncryptionIV != null)
+                {
+                    byteData = Encoding.ASCII.GetBytes(ContantValue.strEncryptionIV + Convert.ToBase64String(byteEncryptionIV));
+                    streamWriter.Write(byteData, 0, byteData.Length);
+                    streamWriter.WriteByte((byte)'\n');
+                }
 
                 streamWriter.Close();
             }
@@ -114,7 +117,14 @@ namespace NotSoSecure.AspDotNetWrapper
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(Encoding.ASCII.GetString(byteClearData));
             Console.ResetColor();
-            Console.WriteLine("\n\nData stored at {0} file!!", AspDotNetWrapper.strDecryptedTxtFilePath);
+            if (DefinePurpose.enumPurpose == EnumPurpose.VIEWSTATE)
+            {
+                Console.WriteLine("\n\nGenerate serealiza payload using ysoserail.net using founded keys!!");
+            }
+            else
+            {
+                Console.WriteLine("\n\nData stored at {0} file!!", AspDotNetWrapper.strDecryptedTxtFilePath);
+            }
         }
 
         public static byte[] Compress(byte[] byteDataToCompress)

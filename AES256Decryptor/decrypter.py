@@ -13,7 +13,6 @@ def decrypt(ciphertext, type):
 	passphraseFound=''
 	saltFound=''
 	with open("KeyList.txt", "r") as ins:
-		array = []
 		for line in ins:
 			try:
 				line=line.rstrip()
@@ -33,6 +32,7 @@ def decrypt(ciphertext, type):
 					plaintext=unpad(cipher.decrypt(base64.b64decode(ciphertext)))
 				
 				if plaintext: #Break if decryption is found
+					#plaintext=plaintext.decode('ascii')
 					passphraseFound=passphrase
 					saltFound=plaintextSalt
 					break

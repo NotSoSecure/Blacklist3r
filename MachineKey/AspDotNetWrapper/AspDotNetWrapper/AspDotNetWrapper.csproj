@@ -52,6 +52,7 @@
     <Compile Include="Customization\DefinePurpose.cs" />
     <Compile Include="Customization\FormAuthenticationHelper.cs" />
     <Compile Include="Customization\HelperClasses.cs" />
+    <Compile Include="Customization\ViewStateHelper.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="AspDotNetWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
