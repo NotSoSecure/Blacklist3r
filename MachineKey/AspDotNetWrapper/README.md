@@ -54,6 +54,7 @@ AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata CA387A93AD4214F35
 
 #### In order to re-generate cookies for other users, It is required to update the cookie information in "DecryptText.txt" file and then run the encryption utility of the tool as shown below:
 #
+Sample Command
 ```console
 AspDotNetWrapper.exe --decryptDataFilePath DecryptedText.txt
 
@@ -62,6 +63,7 @@ AspDotNetWrapper.exe --decryptDataFilePath DecryptedText.txt
 #
 #
 ### To decode ViewState
+Sample Command
 ```console
 AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata /wEPDwUKLTkyMTY0MDUxMg9kFgICAw8WAh4HZW5jdHlwZQUTbXVsdGlwYXJ0L2Zvcm0tZGF0YWRkbdrqZ4p5EfFa9GPqKfSQRGANwLs= --decrypt --purpose=viewstate  --valalgo=sha1 --decalgo=aes --modifier=CA0B0334 --legacy --macdecode
 
@@ -72,6 +74,7 @@ AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata /wEPDwUKLTkyMTY0M
 #
 #
 ### To Decrypt ViewState
+Sample Command
 ```console
 AspDotNetWrapper.exe --keypath MachineKeys.txt --encrypteddata Ve3mZjZwbMRyGTts1EV0F7Hp4eAx11qmXi45oAE7/bDDmA55+Kf9+WWACzUQtly4pRQYkMgmZJnJIDCQQhLNCWaHKbgY7dOiHn8JE7Yx19xvVhYyoqnC8ITLvHiiuJl8+LFmPJwS7ip3vAe+o7mxg2H15VUW5LO56AiTErT7UUw4Au002vflZUF6h/Fx/TJAYciUlZ8CmNW9/GIoPAC9tQ4SVhGD7is8Gu8DiUJE0AjHTLQFcy9vgSk1ovpy4gn9gl98mNVk17uCI7LLYPkvO3Xuix2WTogyqaPQOn7gJz7Say/aqqhmW90LdGo0qeldEUvMGw== --decrypt --purpose=viewstate  --valalgo=sha1 --decalgo=aes --IISDirPath "/" --TargetPagePath "/Content/default.aspx"
 
