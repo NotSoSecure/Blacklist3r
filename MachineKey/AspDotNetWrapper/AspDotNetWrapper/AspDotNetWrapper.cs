@@ -14,20 +14,16 @@ namespace NotSoSecure.AspDotNetWrapper
                 strEncryptedData = null,
                 strDecryptDataFilePath = null,
                 strPurpose = null,
-                strValidationAlgorithm = null,
-                strDecryptionAlgorithm = null,
                 strModifier = null,
                 strIISAppPath = null,
                 strTargetPagePath = null,
                 strAntiCSRFToken = null;
-            bool bDecrypt = false, bDecode = false, bLegacy = false;
+            bool bDecrypt = false, bDecode = false;
             Parser.Default.ParseArguments<Options>(args)
                 .WithParsed<Options>(options =>
                 {
                     strKeysFilePath = options.strKeysFilePath;
                     strEncryptedData = options.strEncryptedData;
-                    strValidationAlgorithm = options.strValidationAlgorithm;
-                    strDecryptionAlgorithm = options.strDecryptionAlgorithm;
                     strPurpose = options.strPurpose;
                     strDecryptDataFilePath = options.strDecryptDataFilePath;
                     strModifier = options.strModifier;
@@ -35,15 +31,10 @@ namespace NotSoSecure.AspDotNetWrapper
                     strTargetPagePath = options.strTargetPagePath;
                     strAntiCSRFToken = options.strAntiCSRFToken;
                     bDecrypt = options.bDecrypt;
-                    bLegacy = options.bLegacy;
                     bDecode = options.bDecode;
                     if (!String.IsNullOrEmpty(options.strOutputFilePath))
                         strDecryptedTxtFilePath = options.strOutputFilePath;
                 });
-            if (strValidationAlgorithm != null)
-                strValidationAlgorithm = strValidationAlgorithm.ToUpper();
-            if (strDecryptionAlgorithm != null)
-                strDecryptionAlgorithm = strDecryptionAlgorithm.ToUpper();
             if (strPurpose != null)
                 DefinePurpose.SetPurposeString(strPurpose);
             else
@@ -54,10 +45,9 @@ namespace NotSoSecure.AspDotNetWrapper
                     return;
                 }
             }
-            if (DefinePurpose.enumPurpose == EnumPurpose.VIEWSTATE && bLegacy && bDecode)
+            if (DefinePurpose.enumPurpose == EnumPurpose.VIEWSTATE && bDecode)
             {
-                if (strKeysFilePath == null || strEncryptedData == null || strValidationAlgorithm == null
-                        || strDecryptionAlgorithm == null || strPurpose == null || strModifier == null)
+                if (strKeysFilePath == null || strEncryptedData == null || strPurpose == null || strModifier == null)
                 {
                     Options.GetViewStateLegacyUsage();
                 }
@@ -65,10 +55,10 @@ namespace NotSoSecure.AspDotNetWrapper
                 {
                     if (File.Exists(strKeysFilePath))
                     {
-                        byte[] protectedData = DefinePurpose.GetProtectedData(strEncryptedData);
+                        byte[] protectedData = DefinePurpose.GetProtectedData(ReadDataFromFile(strEncryptedData));
                         if (protectedData != null)
                         {
-                            EncryptDecrypt.DecodeViewState(protectedData, strKeysFilePath, strValidationAlgorithm, strDecryptionAlgorithm, strModifier, strPurpose);
+                            EncryptDecrypt.DecodeViewState(protectedData, strKeysFilePath, strModifier, strPurpose);
                         }
                     }
                 }
@@ -80,8 +70,7 @@ namespace NotSoSecure.AspDotNetWrapper
                 {
                     if (DefinePurpose.enumPurpose == EnumPurpose.VIEWSTATE)
                     {
-                        if (strKeysFilePath == null || strEncryptedData == null || strValidationAlgorithm == null
-                            || strDecryptionAlgorithm == null || strPurpose == null || strIISAppPath == null || strTargetPagePath == null )
+                        if (strKeysFilePath == null || strEncryptedData == null || strPurpose == null || strIISAppPath == null || strTargetPagePath == null )
                         {
                             Options.GetViewStateUsage();
                             return;
@@ -89,8 +78,7 @@ namespace NotSoSecure.AspDotNetWrapper
                     }
                     else
                     {
-                        if (strKeysFilePath == null || strEncryptedData == null || strValidationAlgorithm == null
-                        || strDecryptionAlgorithm == null || strPurpose == null)
+                        if (strKeysFilePath == null || strEncryptedData == null || strPurpose == null)
                         {
                             Options.GetUsage(true);
                             return;
@@ -98,11 +86,11 @@ namespace NotSoSecure.AspDotNetWrapper
                     }
                     if (File.Exists(strKeysFilePath))
                     {
-                        byte[] protectedData = DefinePurpose.GetProtectedData(strEncryptedData);
+                        byte[] protectedData = DefinePurpose.GetProtectedData(ReadDataFromFile(strEncryptedData));
                         if (protectedData != null)
                         {
                             
-                            byte[] clearData = EncryptDecrypt.DecryptData(protectedData, strKeysFilePath, strValidationAlgorithm, strDecryptionAlgorithm, strTargetPagePath, strIISAppPath, strAntiCSRFToken);
+                            byte[] clearData = EncryptDecrypt.DecryptData(protectedData, strKeysFilePath, strTargetPagePath, strIISAppPath, strAntiCSRFToken);
                             if (clearData != null)
                             {
                                 DataWriter.WritePurposeToFile(strPurpose);
@@ -147,6 +135,20 @@ namespace NotSoSecure.AspDotNetWrapper
                     }
                 }
             }
+        }
+
+        private static string ReadDataFromFile(string strPath)
+        {
+            string strData = String.Empty;
+            if(File.Exists(strPath))
+            {
+                strData = File.ReadAllText(strPath);
+            }
+            else
+            {
+                strData = strPath;
+            }
+            return strData;
         }
     }
 }

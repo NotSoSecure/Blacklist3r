@@ -66,7 +66,7 @@ namespace NotSoSecure.AspDotNetWrapper
                     byteProtectedData = HttpServerUtility.UrlTokenDecode(strEncryptedText);
                     break;
                 case EnumPurpose.SCRIPTRESOURCE:
-                    byteProtectedData = null;
+                    byteProtectedData = HttpServerUtility.UrlTokenDecode(strEncryptedText);
                     break;
                 case EnumPurpose.VIEWSTATE:
                     byteProtectedData = System.Convert.FromBase64String(strEncryptedText);
@@ -107,7 +107,7 @@ namespace NotSoSecure.AspDotNetWrapper
                     objPurpose = new Purpose("AssemblyResourceLoader.WebResourceUrl");
                     break;
                 case EnumPurpose.SCRIPTRESOURCE:
-                    objPurpose = null;
+                    objPurpose = new Purpose("ScriptResourceHandler.ScriptResourceUrl");
                     break;
                 case EnumPurpose.VIEWSTATE:
                     //Written separate function
@@ -148,11 +148,11 @@ namespace NotSoSecure.AspDotNetWrapper
                     break;
                 case EnumPurpose.WEBRESOURCE:
                     objPurpose = Purpose.AssemblyResourceLoader_WebResourceUrl;
-                    byteClearData = null;
+                    byteClearData = Encoding.ASCII.GetBytes(objData.WebResourceData);
                     break;
                 case EnumPurpose.SCRIPTRESOURCE:
-                    byteClearData = null;
-                    objPurpose = null;
+                    objPurpose = Purpose.ScriptResourceHandler_ScriptResourceUrl;
+                    byteClearData = Encoding.ASCII.GetBytes(objData.ScriptResourceData);
                     break;
                 case EnumPurpose.VIEWSTATE:
                     byteClearData = null;

@@ -49,12 +49,17 @@ namespace NotSoSecure.AspDotNetWrapper
         public static string strPurpose = "Purpose:";
         public static string strEncryptionIV = "EncryptionIV:";
         public static string strAspNetApplicationCookie = ".AspNet.ApplicationCookie:";
+        public static string strWebResourceData = "WebResourceData:";
+        public static string strScriptResourceData = "ScriptResourceData:";
         public static string strIssuedUTC = "IssuedUTC:";
         public static string strExpireUTC = "ExpiredUTC:";
         public static string strIsPersistent = "IsPersistent:";
         public static string strUserName = "UserName:";
         public static string strUserData = "UserData:";
         public static string strCookiePath = "CookiePath:";
+
+        public static string[] arrayDecryptionAlgo = { "AES", "DES", "TripleDES" };
+        public static string[] arrayValidationAlgo = { "SHA1", "HMACSHA256", "HMACSHA384", "HMACSHA512" };
     }
 
     class ReadObject
@@ -66,6 +71,8 @@ namespace NotSoSecure.AspDotNetWrapper
         public byte [] EncryptionIV { get; set; }
         public string Purpose { get; set; }
         public string AspNetAppCookie { get; set; }
+        public string WebResourceData { get; set; }
+        public string ScriptResourceData { get; set; }
         public bool IsError { get; set; }
         public FormsAuthenticationCookie objFormAuthCookie = new FormsAuthenticationCookie();
 
@@ -127,6 +134,14 @@ namespace NotSoSecure.AspDotNetWrapper
                 else if (line.Contains(ContantValue.strUserName))
                 {
                     objFormAuthCookie.UserName = line.Substring(ContantValue.strUserName.Length);
+                }
+                else if (line.Contains(ContantValue.strWebResourceData))
+                {
+                    WebResourceData = line.Substring(ContantValue.strWebResourceData.Length);
+                }
+                else if (line.Contains(ContantValue.strScriptResourceData))
+                {
+                    ScriptResourceData = line.Substring(ContantValue.strScriptResourceData.Length);
                 }
                 else
                 {

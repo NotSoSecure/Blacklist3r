@@ -94,10 +94,14 @@ namespace NotSoSecure.AspDotNetWrapper
                         streamWriter.Write(byteData, 0, byteData.Length);
                         break;
                     case EnumPurpose.WEBRESOURCE:
-
+                        byteData = Encoding.ASCII.GetBytes(ContantValue.strWebResourceData);
+                        streamWriter.Write(byteData, 0, byteData.Length);
+                        streamWriter.Write(byteClearData, 0, byteClearData.Length);
                         break;
                     case EnumPurpose.SCRIPTRESOURCE:
-
+                        byteData = Encoding.ASCII.GetBytes(ContantValue.strScriptResourceData);
+                        streamWriter.Write(byteData, 0, byteData.Length);
+                        streamWriter.Write(byteClearData, 0, byteClearData.Length);
                         break;
                     case EnumPurpose.VIEWSTATE:
 

@@ -20,20 +20,11 @@ namespace NotSoSecure.AspDotNetWrapper
         [Option('p', "purpose", Required = false, HelpText = "purpose")]
         public string strPurpose { get; set; }
 
-        [Option('a', "valalgo", Required = false, HelpText = "Validation algorithm")]
-        public string strValidationAlgorithm { get; set; }
-
-        [Option('b', "decalgo", Required = false, HelpText = "Decryption algorithm")]
-        public string strDecryptionAlgorithm { get; set; }
-
         [Option('m', "modifier", Required = false, HelpText = "Modifier used to encode the viewstate")]
         public string strModifier { get; set; }
 
         [Option('s', "macdecode", Required = false, HelpText = "Used to decide whether viewstate is MAC enabled or not")]
         public bool bDecode { get; set; }
-
-        [Option('l', "legacy", Required = false, HelpText = "Used to decide whether viewstate legacy decrypt")]
-        public bool bLegacy { get; set; }
 
         [Option('o', "outputFile", Required = false, HelpText = "Output file path")]
         public string strOutputFilePath { get; set; }
@@ -54,7 +45,7 @@ namespace NotSoSecure.AspDotNetWrapper
                 Console.WriteLine("Required option missing!!");
                 Console.WriteLine("-------------------------");
                 Console.WriteLine("-r, --keypath Required keys file path.");
-                Console.WriteLine("-c, --encrypteddata Encrypted data value to decrypt.");
+                Console.WriteLine("-c, --encrypteddata EncryptedData/FilePath(In which value is stored) to decrypt.");
                 Console.WriteLine("-p, --purpose Purpose of the encrypteddata");
                 Console.WriteLine("-d, --decrypt(Default: false) To decrypt the encrypteddata.");
                 Console.WriteLine("-a, --valalgo Validation algorithm.");
@@ -78,13 +69,12 @@ namespace NotSoSecure.AspDotNetWrapper
             Console.WriteLine("Required option missing!!");
             Console.WriteLine("-------------------------");
             Console.WriteLine("-r, --keypath Required keys file path.");
-            Console.WriteLine("-c, --encrypteddata ViewState data to decode or decrypt.");
+            Console.WriteLine("-c, --encrypteddata ViewStatedata/FilePath(In which value is stored) to decode or decrypt.");
             Console.WriteLine("-p, --purpose Purpose of the encrypteddata");
             Console.WriteLine("-a, --valalgo Validation algorithm.");
             Console.WriteLine("-b, --decalgo Decryption algorithm.");
             Console.WriteLine("-m, --modifier Modifier userd to encode the data.");
             Console.WriteLine("-s, --macdecode Used to decide whether the data needs to decode or not.");
-            Console.WriteLine("-l, --legacy Used to decide legacy encryption/encoding scheme used or not.");
         }
 
         //Usage for .net >= 4.5
@@ -93,11 +83,10 @@ namespace NotSoSecure.AspDotNetWrapper
             Console.WriteLine("Required option missing!!");
             Console.WriteLine("-------------------------");
             Console.WriteLine("-r, --keypath Required keys file path.");
-            Console.WriteLine("-c, --encrypteddata ViewState data to decode or decrypt.");
+            Console.WriteLine("-c, --encrypteddata ViewStatedata/FilePath(In which value is stored) to decode or decrypt.");
             Console.WriteLine("-p, --purpose Purpose of the encrypteddata");
             Console.WriteLine("-a, --valalgo Validation algorithm.");
             Console.WriteLine("-b, --decalgo Decryption algorithm.");
-            Console.WriteLine("-l, --legacy Used to decide legacy encryption/encoding scheme used or not.");
             Console.WriteLine("-i, --IISDirPath Application dir path in IIS tree.");
             Console.WriteLine("-t, --TargetPagePath Target page path");
             Console.WriteLine("-v, --antiCSRFToken Anti CSRF Token value");
