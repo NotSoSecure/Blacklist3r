@@ -76,17 +76,22 @@ namespace NotSoSecure.AspDotNetWrapper
                         break;
                 }
             }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\n\nKey path file {0} not found!!\n\n", strMachineKeysFilePath);
+                Console.ResetColor();
+            }
             return clearData;
         }
 
-        public static void DecodeViewState(byte[] protectedData, string strMachineKeysFilePath, string modifier, string strPurpose)
+        public static bool DecodeViewState(byte[] protectedData, string strMachineKeysFilePath, string modifier, string strPurpose)
         {
+            bool bFound = false;
             if (File.Exists(strMachineKeysFilePath))
             {
                 Console.Write("\n\nDecode process start!!\n\n");
-
                 string[] machineKeys = File.ReadAllLines(strMachineKeysFilePath);
-                bool bFound = false;
                 foreach (string strDecryptionAlgorithm in ContantValue.arrayDecryptionAlgo)
                 {
                     foreach (string strValidationAlgorithm in ContantValue.arrayValidationAlgo)
@@ -94,28 +99,34 @@ namespace NotSoSecure.AspDotNetWrapper
                         int nIndex = 1;
                         foreach (string strLine in machineKeys)
                         {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.Write("\rPocessing machinekeys {0},{1}: {2}/{3}..............", strDecryptionAlgorithm, strValidationAlgorithm, nIndex++, machineKeys.Length);
-
-                            string[] values = strLine.Split(',');
-                            string strValidationKey = values[0];
-                            string strDecryptionKey = values[1];
-
-                            string strDecodedData = ViewStateHelper.DecodeData(strValidationKey, strValidationAlgorithm, protectedData, modifier);
-                            if (!String.IsNullOrEmpty(strDecodedData))
+                            try
                             {
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine("\n\nKeys found!!");
-                                Console.WriteLine("------------");
                                 Console.ForegroundColor = ConsoleColor.Blue;
-                                Console.WriteLine("DecryptionKey:" + strDecryptionKey);
-                                Console.WriteLine("ValidationKey:" + strValidationKey);
-                                DataWriter.WriteKeysToFile(strValidationKey, strDecryptionKey, strValidationAlgorithm, strDecryptionAlgorithm, null);
-                                DataWriter.WritePurposeToFile(strPurpose);
-                                Console.WriteLine("\n\nEncodedDataWithoutHash:" + strDecodedData);
-                                Console.ResetColor();
-                                bFound = true;
-                                break;
+                                Console.Write("\rPocessing machinekeys {0},{1}: {2}/{3}..............", strDecryptionAlgorithm, strValidationAlgorithm, nIndex++, machineKeys.Length);
+
+                                string[] values = strLine.Split(',');
+                                string strValidationKey = values[0];
+                                string strDecryptionKey = values[1];
+
+                                string strDecodedData = ViewStateHelper.DecodeData(strValidationKey, strValidationAlgorithm, protectedData, modifier);
+                                if (!String.IsNullOrEmpty(strDecodedData))
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("\n\nKeys found!!");
+                                    Console.WriteLine("------------");
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                    Console.WriteLine("DecryptionKey:" + strDecryptionKey);
+                                    Console.WriteLine("ValidationKey:" + strValidationKey);
+                                    DataWriter.WriteKeysToFile(strValidationKey, strDecryptionKey, strValidationAlgorithm, strDecryptionAlgorithm, null);
+                                    DataWriter.WritePurposeToFile(strPurpose);
+                                    Console.WriteLine("\n\nEncodedDataWithoutHash:" + strDecodedData);
+                                    Console.ResetColor();
+                                    bFound = true;
+                                    break;
+                                }
+                            }
+                            catch (Exception e)
+                            {
                             }
                         }
                         if (bFound)
@@ -125,6 +136,13 @@ namespace NotSoSecure.AspDotNetWrapper
                         break;
                 }
             }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\n\nKey path file {0} not found!!\n\n", strMachineKeysFilePath);
+                Console.ResetColor();
+            }
+            return bFound;
         }
 
         public static string EncryptData(string strDecryptDataFilePath)

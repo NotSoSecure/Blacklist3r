@@ -58,11 +58,21 @@ namespace NotSoSecure.AspDotNetWrapper
                         byte[] protectedData = DefinePurpose.GetProtectedData(ReadDataFromFile(strEncryptedData));
                         if (protectedData != null)
                         {
-                            EncryptDecrypt.DecodeViewState(protectedData, strKeysFilePath, strModifier, strPurpose);
+                            if(!EncryptDecrypt.DecodeViewState(protectedData, strKeysFilePath, strModifier, strPurpose))
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write("\n\nKeys not found!!\n\n");
+                                Console.ResetColor();
+                            }
                         }
                     }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("\n\nKey path file {0} not found!!\n\n", strKeysFilePath);
+                        Console.ResetColor();
+                    }
                 }
-
             }
             else
             {
@@ -89,12 +99,17 @@ namespace NotSoSecure.AspDotNetWrapper
                         byte[] protectedData = DefinePurpose.GetProtectedData(ReadDataFromFile(strEncryptedData));
                         if (protectedData != null)
                         {
-                            
                             byte[] clearData = EncryptDecrypt.DecryptData(protectedData, strKeysFilePath, strTargetPagePath, strIISAppPath, strAntiCSRFToken);
                             if (clearData != null)
                             {
                                 DataWriter.WritePurposeToFile(strPurpose);
                                 DataWriter.WriteOtherDataToFile(DefinePurpose.enumPurpose, clearData);
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write("\n\nKeys not found!!\n\n");
+                                Console.ResetColor();
                             }
                         }
                         else
@@ -105,7 +120,7 @@ namespace NotSoSecure.AspDotNetWrapper
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("\n\nKey path file {0} not found!!\n", strKeysFilePath);
+                        Console.Write("\n\nKey path file {0} not found!!\n\n", strKeysFilePath);
                         Console.ResetColor();
                     }
                 }
