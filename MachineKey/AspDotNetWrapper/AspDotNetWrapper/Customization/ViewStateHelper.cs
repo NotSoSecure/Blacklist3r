@@ -11,7 +11,7 @@ namespace NotSoSecure.AspDotNetWrapper
 {
     class ViewStateHelper
     {
-        public static string[] algorithms = { "MD5", "SHA1", "SHA256", "SHA384", "SHA512"};
+        public static string[] algorithms = { "MD5", "SHA1", "HMACSHA256", "HMACSHA384", "HMACSHA512"};
         public static int[] hashSizes = { 16, 20, 32, 48, 64 };
 
         public static string DecodeData(string strValidationKey, string strValidationAlgorithm, byte[] protectedData, string modifier)
