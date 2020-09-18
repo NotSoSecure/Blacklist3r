@@ -126,7 +126,8 @@ namespace NotSoSecure.AspDotNetWrapper
                                 }
                             }
                             catch (Exception e)
-                            {
+                            {   
+                                Console.WriteLine("Error Decoding ViewState: " + e);
                             }
                         }
                         if (bFound)
