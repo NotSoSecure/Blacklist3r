@@ -65,7 +65,7 @@ namespace NotSoSecure.AspDotNetWrapper
                                     Console.ResetColor();
                                 }
                             }
-                            catch (Exception e)
+                            catch
                             {
                             }
                         }

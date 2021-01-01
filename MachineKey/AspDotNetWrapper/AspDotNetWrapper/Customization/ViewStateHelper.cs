@@ -30,31 +30,41 @@ namespace NotSoSecure.AspDotNetWrapper
             Buffer.BlockCopy(byteModifier, 0, byteData, dataSize, byteModifier.Length);
 
             KeyedHashAlgorithm keyedHashAlgorithm = GetHMACAlgorithm(strValidationAlgorithm, CryptoUtil.HexToBinary(strValidationKey));
-            byte[] computedHash= keyedHashAlgorithm.ComputeHash(byteData);
-
-            if (CryptoUtil.BinaryToHex(computedHash) == CryptoUtil.BinaryToHex(byteHash))
+            if (keyedHashAlgorithm != null)
             {
-                byte[] rawData = new byte[dataSize];
-                Buffer.BlockCopy(protectedData, 0, rawData, 0, dataSize);
-                return System.Convert.ToBase64String(rawData);
+                byte[] computedHash = keyedHashAlgorithm.ComputeHash(byteData);
+
+                if (CryptoUtil.BinaryToHex(computedHash) == CryptoUtil.BinaryToHex(byteHash))
+                {
+                    byte[] rawData = new byte[dataSize];
+                    Buffer.BlockCopy(protectedData, 0, rawData, 0, dataSize);
+                    return System.Convert.ToBase64String(rawData);
+                }
             }
             return "";
         }
 
         public static KeyedHashAlgorithm GetHMACAlgorithm(string digestMethod, byte[] validationKey)
         {
-            switch (digestMethod)
+            try
             {
-                case "SHA1":
-                    return new HMACSHA1(validationKey);
-                case "HMACSHA256":
-                    return new HMACSHA256(validationKey);
-                case "HMACSHA384":
-                    return new HMACSHA384(validationKey);
-                case "HMACSHA512":
-                    return new HMACSHA512(validationKey);
-                default:
-                    return new HMACSHA256(validationKey);
+                switch (digestMethod)
+                {
+                    case "SHA1":
+                        return new HMACSHA1(validationKey);
+                    case "HMACSHA256":
+                        return new HMACSHA256(validationKey);
+                    case "HMACSHA384":
+                        return new HMACSHA384(validationKey);
+                    case "HMACSHA512":
+                        return new HMACSHA512(validationKey);
+                    default:
+                        return new HMACSHA256(validationKey);
+                }
+            }
+            catch
+            {
+                return null;
             }
         }
     }
