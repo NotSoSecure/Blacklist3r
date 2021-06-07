@@ -4,4 +4,12 @@ The goal of this project is to accumulate the secret keys / secret materials rel
 
 We are releasing this project with.Net machine key tool to identify usage of pre-shared Machine Keys in the application for encryption and decryption of forms authentication cookie.
 
-Detailed Description: https://www.notsosecure.com/project-blacklist3r/
+## References:
+
+- [Project Blacklist3r](https://www.notsosecure.com/project-blacklist3r/)
+- [Identify and Exploit ViewState Deserialization](https://notsosecure.com/exploiting-viewstate-deserialization-using-blacklist3r-and-ysoserial-net/)
+
+## Mention
+
+- [ASP.NET Cryptography for Pentesters](https://blog.liquidsec.net/2021/06/01/asp-net-cryptography-for-pentesters/)
+
