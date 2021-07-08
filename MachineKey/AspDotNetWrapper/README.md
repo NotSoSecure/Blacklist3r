@@ -10,7 +10,7 @@ AspDotNetWrapper 2.0.0.0
 Copyright ©  2019
 
   -r, --keypath                Machine keys file path.
-  -c, --encrypteddata          Encrypted data value to decrypt.
+  -c, --encrypteddata          Encrypted data value to decrypt. Can be a string or a path to a file in which the encrypted data is stored.
   -d, --decrypt                (Default: false) To decrypt the encrypted data.
   -f, --decryptDataFilePath    file path where the decrypted information stored
   -p, --purpose                purpose
