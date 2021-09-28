@@ -12,6 +12,7 @@ namespace NotSoSecure.AspDotNetWrapper
     enum EnumPurpose
     {
         OWINCOOKIE,
+        OWINOAUTH,
         ASPXAUTH,
         SCRIPTRESOURCE,
         WEBRESOURCE,
@@ -28,6 +29,9 @@ namespace NotSoSecure.AspDotNetWrapper
             {
                 case "owin.cookie":
                     enumPurpose = EnumPurpose.OWINCOOKIE;
+                    break;
+                case "owin.oauth":
+                    enumPurpose = EnumPurpose.OWINOAUTH;
                     break;
                 case "aspxauth":
                     enumPurpose = EnumPurpose.ASPXAUTH;
@@ -57,6 +61,13 @@ namespace NotSoSecure.AspDotNetWrapper
                     var padding = 3 - ((strEncryptedText.Length + 3) % 4);
                     if (padding != 0)
                         strEncryptedText = strEncryptedText + new string('=', padding);
+                    byteProtectedData = Convert.FromBase64String(strEncryptedText);
+                    break;
+                case EnumPurpose.OWINOAUTH:
+                    strEncryptedText = strEncryptedText.Replace('-', '+').Replace('_', '/');
+                    var padding1 = 3 - ((strEncryptedText.Length + 3) % 4);
+                    if (padding1 != 0)
+                        strEncryptedText = strEncryptedText + new string('=', padding1);
                     byteProtectedData = Convert.FromBase64String(strEncryptedText);
                     break;
                 case EnumPurpose.ASPXAUTH:
@@ -100,6 +111,20 @@ namespace NotSoSecure.AspDotNetWrapper
                     };
                     dictPurposeMap.TryGetValue("owin.cookie", out objPurpose);
                     break;
+                case EnumPurpose.OWINOAUTH:
+                    Dictionary<string, Purpose> dictPurposeMap1 = new Dictionary<string, Purpose>(StringComparer.Ordinal)
+                    {
+                        { "owin.oauth", Purpose.User_MachineKey_Protect.AppendSpecificPurposes(
+                            new [] {
+                                "Microsoft.Owin.Security.OAuth",
+                                "Access_Token",
+                                "v1"
+                                }
+                            )
+                        }
+                    };
+                    dictPurposeMap1.TryGetValue("owin.oauth", out objPurpose);
+                    break;
                 case EnumPurpose.ASPXAUTH:
                     objPurpose = new Purpose("FormsAuthentication.Ticket");
                     break;
@@ -141,6 +166,21 @@ namespace NotSoSecure.AspDotNetWrapper
                     };
                     dictPurposeMap.TryGetValue("owin.cookie", out objPurpose);
                     byteClearData = DataWriter.Compress(StringToHexByteArray(objData.AspNetAppCookie));
+                    break;
+                case EnumPurpose.OWINOAUTH:
+                    Dictionary<string, Purpose> dictPurposeMap1 = new Dictionary<string, Purpose>(StringComparer.Ordinal)
+                    {
+                        { "owin.oauth", Purpose.User_MachineKey_Protect.AppendSpecificPurposes(
+                            new [] {
+                                "Microsoft.Owin.Security.OAuth",
+                                "Access_Token",
+                                "v1"
+                                }
+                            )
+                        }
+                    };
+                    dictPurposeMap1.TryGetValue("owin.oauth", out objPurpose);
+                    byteClearData = DataWriter.Compress(StringToHexByteArray(objData.AspNetpOAuth));
                     break;
                 case EnumPurpose.ASPXAUTH:
                     objPurpose = Purpose.FormsAuthentication_Ticket;

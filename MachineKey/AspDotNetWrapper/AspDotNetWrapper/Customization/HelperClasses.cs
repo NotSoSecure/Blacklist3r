@@ -49,6 +49,7 @@ namespace NotSoSecure.AspDotNetWrapper
         public static string strPurpose = "Purpose:";
         public static string strEncryptionIV = "EncryptionIV:";
         public static string strAspNetApplicationCookie = ".AspNet.ApplicationCookie:";
+        public static string strAspNetOAuth = "AspNet.Oauth:";
         public static string strWebResourceData = "WebResourceData:";
         public static string strScriptResourceData = "ScriptResourceData:";
         public static string strIssuedUTC = "IssuedUTC:";
@@ -71,6 +72,7 @@ namespace NotSoSecure.AspDotNetWrapper
         public byte [] EncryptionIV { get; set; }
         public string Purpose { get; set; }
         public string AspNetAppCookie { get; set; }
+        public string AspNetpOAuth { get; set; }
         public string WebResourceData { get; set; }
         public string ScriptResourceData { get; set; }
         public bool IsError { get; set; }
@@ -110,6 +112,10 @@ namespace NotSoSecure.AspDotNetWrapper
                 else if (line.Contains(ContantValue.strAspNetApplicationCookie))
                 {
                     AspNetAppCookie = line.Substring(ContantValue.strAspNetApplicationCookie.Length);
+                }
+                else if (line.Contains(ContantValue.strAspNetOAuth))
+                {
+                    AspNetpOAuth = line.Substring(ContantValue.strAspNetOAuth.Length);
                 }
                 else if (line.Contains(ContantValue.strIssuedUTC))
                 {
