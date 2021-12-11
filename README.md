@@ -4,6 +4,8 @@ The goal of this project is to accumulate the secret keys / secret materials rel
 
 We are releasing this project with.Net machine key tool to identify usage of pre-shared Machine Keys in the application for encryption and decryption of forms authentication cookie.
 
+Note: Requires Visual Studio 2019, not 2022. Visual Studio 2022 does not support .NET Framework 4.5, which this repo relies on. 
+
 ## References:
 
 - [Project Blacklist3r](https://www.notsosecure.com/project-blacklist3r/)
