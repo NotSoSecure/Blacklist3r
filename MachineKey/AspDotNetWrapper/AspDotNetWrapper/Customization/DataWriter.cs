@@ -68,6 +68,12 @@ namespace NotSoSecure.AspDotNetWrapper
                         streamWriter.Write(byteData, 0, byteData.Length);
                         streamWriter.Write(byteClearData, 0, byteClearData.Length);
                         break;
+                    case EnumPurpose.OWINOAUTH:
+                        byteClearData = Decompress(byteClearData);
+                        byteData = Encoding.ASCII.GetBytes(ContantValue.strAspNetOAuth);
+                        streamWriter.Write(byteData, 0, byteData.Length);
+                        streamWriter.Write(byteClearData, 0, byteClearData.Length);
+                        break;
                     case EnumPurpose.ASPXAUTH:
                         FormsAuthenticationCookie objCookie = FormAuthenticationHelper.ConvertToAuthenticationTicket(byteClearData);
                         byteData = Encoding.ASCII.GetBytes(ContantValue.strCookiePath + objCookie.CookiePath);

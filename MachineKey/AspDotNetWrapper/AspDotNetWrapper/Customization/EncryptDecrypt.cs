@@ -176,6 +176,9 @@ namespace NotSoSecure.AspDotNetWrapper
                 case EnumPurpose.OWINCOOKIE:
                     outputString = Convert.ToBase64String(byteProtectedData).Replace('+', '-').Replace('/', '_').Replace("=", "");
                     break;
+                case EnumPurpose.OWINOAUTH:
+                    outputString = Convert.ToBase64String(byteProtectedData).Replace('+', '-').Replace('/', '_').Replace("=", "");
+                    break;
                 case EnumPurpose.ASPXAUTH:
                     outputString = CryptoUtil.BinaryToHex(byteProtectedData);
                     break;
