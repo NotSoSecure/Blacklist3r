@@ -14,4 +14,5 @@ Note: Requires Visual Studio 2019, not 2022. Visual Studio 2022 does not support
 ## Mention
 
 - [ASP.NET Cryptography for Pentesters](https://blog.liquidsec.net/2021/06/01/asp-net-cryptography-for-pentesters/)
+- [Customising Blacklist3r for OWIN OAuth Access Tokens](https://zxsecurity.co.nz/research/blacklist3r-customisation/)
 
