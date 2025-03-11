@@ -10,6 +10,7 @@ Note: Requires Visual Studio 2019, not 2022. Visual Studio 2022 does not support
 
 - [Project Blacklist3r](https://www.notsosecure.com/project-blacklist3r/)
 - [Identify and Exploit ViewState Deserialization](https://notsosecure.com/exploiting-viewstate-deserialization-using-blacklist3r-and-ysoserial-net/)
+- [Code injection attacks using publicly disclosed ASP.NET machine keys](https://www.microsoft.com/en-us/security/blog/2025/02/06/code-injection-attacks-using-publicly-disclosed-asp-net-machine-keys/)
 
 ## Mention
 
